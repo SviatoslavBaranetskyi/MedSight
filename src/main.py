@@ -1,10 +1,11 @@
-from fastapi import FastAPI, Depends, Form, Request, HTTPException, status
-from sqlalchemy.orm import Session
-from fastapi.responses import HTMLResponse, RedirectResponse
+import json
+import base64
+from fastapi import FastAPI, Form, UploadFile, File
+from fastapi.responses import HTMLResponse
 from starlette.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 
-import models, auth
+import models, auth, ml_model
 from utils import *
 from database import engine
 from auth import create_access_token
@@ -15,6 +16,14 @@ app = FastAPI()
 
 templates = Jinja2Templates(directory="templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+
+def b64encode_image(image_data):
+    return base64.b64encode(image_data).decode('utf-8')
+
+
+# Filter registration
+templates.env.filters['b64encode'] = b64encode_image
 
 
 @app.get("/register/", response_class=HTMLResponse)
@@ -33,7 +42,6 @@ def register(username: str = Form(...), email: str = Form(...), password: str = 
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-    # Редирект на страницу логина после успешной регистрации
     return RedirectResponse(url="/login/", status_code=status.HTTP_303_SEE_OTHER)
 
 
@@ -53,25 +61,16 @@ def login_for_access_token(username: str = Form(...), password: str = Form(...),
         )
     access_token = create_access_token(data={"sub": user.username})
     response = RedirectResponse(url="/", status_code=status.HTTP_303_SEE_OTHER)
-    # Устанавливаем JWT-токен в cookie
-    response.set_cookie(key="access_token", value=f"Bearer {access_token}", httponly=True)
+    response.set_cookie(key="access_token", value=f"Bearer {access_token}", httponly=True, secure=True)
     return response
 
 
-@app.get("/", response_class=HTMLResponse)
-def read_root(request: Request, db: Session = Depends(get_db)):
-    token = request.cookies.get("access_token")
-
-    if not token:
-        return RedirectResponse(url="/login/", status_code=status.HTTP_303_SEE_OTHER)
-
-    token = token.split(" ")[1] if " " in token else token
-    try:
-        current_user = auth.get_current_user(db=db, token=token)
-    except HTTPException:
-        return RedirectResponse(url="/login/", status_code=status.HTTP_303_SEE_OTHER)
-
-    return templates.TemplateResponse("index.html", {"request": request, "user": current_user})
+@app.get("/")
+async def read_root(request: Request, db: Session = Depends(get_db)):
+    user = await get_authenticated_user(request, db)
+    if isinstance(user, RedirectResponse):
+        return user
+    return templates.TemplateResponse("index.html", {"request": request, "user": user})
 
 
 @app.get("/logout/")
@@ -79,3 +78,36 @@ def logout():
     response = RedirectResponse(url="/login/", status_code=status.HTTP_303_SEE_OTHER)
     response.delete_cookie("access_token")
     return response
+
+
+@app.get("/analyze/", response_class=HTMLResponse)
+async def get_current_analysis(request: Request, db: Session = Depends(get_db)):
+    user = await get_authenticated_user(request, db)
+    if isinstance(user, RedirectResponse):
+        return user
+
+    current_analysis = db.query(models.Analysis).filter(models.Analysis.user_id == user.id).order_by(
+        models.Analysis.created_at.desc()).first()
+
+    if not current_analysis:
+        return templates.TemplateResponse("no_analysis.html", {"request": request})
+
+    return templates.TemplateResponse("current_analysis.html", {"request": request, "analysis": current_analysis})
+
+
+@app.post("/predict/")
+async def predict_diseases(request: Request, image: UploadFile = File(...), db: Session = Depends(get_db)):
+    user = await get_authenticated_user(request, db)
+    if isinstance(user, RedirectResponse):
+        return user
+
+    image_data = await image.read()
+    predicted_labels = ml_model.predict_image(image_data, ml_model.model, ml_model.transform, ml_model.class_map)
+
+    result_as_string = json.dumps(predicted_labels)
+    analysis = models.Analysis(user_id=user.id, image_data=image_data, result=result_as_string)
+    db.add(analysis)
+    db.commit()
+    db.refresh(analysis)
+
+    return RedirectResponse(url="/", status_code=status.HTTP_303_SEE_OTHER)
