@@ -1,0 +1,11 @@
+<h1>Профиль пользователя: {{ user.username }}</h1>
+<p>Email: {{ user.email }}</p>
+
+<h2>История анализов</h2>
+<ul>
+{% for analysis in analyses %}
+    <li>
+        <a href="/results/{{ analysis.id }}">Анализ от {{ analysis.created_at }}</a>
+    </li>
+{% endfor %}
+</ul>

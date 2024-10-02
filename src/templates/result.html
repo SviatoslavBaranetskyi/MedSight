@@ -1,0 +1,8 @@
+<h1>Результат анализа</h1>
+<img src="data:image/png;base64,{{ image_data }}" alt="Рентгеновский снимок">
+<p>Предсказанные заболевания:</p>
+<ul>
+{% for disease in result %}
+    <li>{{ disease }}</li>
+{% endfor %}
+</ul>
