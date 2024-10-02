@@ -9,6 +9,7 @@ import models, auth, ml_model
 from utils import *
 from database import engine
 from auth import create_access_token
+from schemas import UserResponse
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -111,3 +112,9 @@ async def predict_diseases(request: Request, image: UploadFile = File(...), db: 
     db.refresh(analysis)
 
     return RedirectResponse(url="/", status_code=status.HTTP_303_SEE_OTHER)
+
+
+@app.get("/users/me", response_model=UserResponse)
+async def current_user(request: Request, db: Session = Depends(get_db)):
+    user = await check_auth(request, db)
+    return user
