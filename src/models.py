@@ -24,5 +24,4 @@ class Analysis(Base):
     result = Column(String)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    # Связь с пользователем
     user = relationship("User", back_populates="analyses")
