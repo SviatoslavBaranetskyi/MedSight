@@ -44,7 +44,7 @@ def register(username: str = Form(...), email: str = Form(...), password: str = 
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-    return RedirectResponse(url="/login/", status_code=status.HTTP_303_SEE_OTHER)
+    return RedirectResponse(url="/auth/login/", status_code=status.HTTP_303_SEE_OTHER)
 
 
 @router_auth.get("/login/", response_class=HTMLResponse)
@@ -77,7 +77,7 @@ async def read_root(request: Request, db: Session = Depends(get_db)):
 
 @router_auth.get("/logout/")
 def logout():
-    response = RedirectResponse(url="/login/", status_code=status.HTTP_303_SEE_OTHER)
+    response = RedirectResponse(url="/auth/login/", status_code=status.HTTP_303_SEE_OTHER)
     response.delete_cookie("access_token")
     return response
 
@@ -112,7 +112,7 @@ async def predict_diseases(request: Request, image: UploadFile = File(...), db: 
     db.commit()
     db.refresh(analysis)
 
-    return RedirectResponse(url="/", status_code=status.HTTP_303_SEE_OTHER)
+    return RedirectResponse(url="/analyze/", status_code=status.HTTP_303_SEE_OTHER)
 
 
 @app.get("/users/me", response_model=UserResponse)
