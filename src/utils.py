@@ -17,13 +17,13 @@ async def get_authenticated_user(request: Request, db: Session = Depends(get_db)
     token = request.cookies.get("access_token")
 
     if not token:
-        return RedirectResponse(url="/login/", status_code=status.HTTP_303_SEE_OTHER)
+        return RedirectResponse(url="/auth/login/", status_code=status.HTTP_303_SEE_OTHER)
 
     token = token.split(" ")[1] if " " in token else token
     try:
         user = get_current_user(token=token, db=db)
     except HTTPException:
-        return RedirectResponse(url="/login/", status_code=status.HTTP_303_SEE_OTHER)
+        return RedirectResponse(url="/auth/login/", status_code=status.HTTP_303_SEE_OTHER)
 
     return user
 

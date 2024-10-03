@@ -10,6 +10,7 @@ from utils import *
 from database import engine
 from auth import create_access_token
 from schemas import UserResponse
+from router import router_auth
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -27,12 +28,12 @@ def b64encode_image(image_data):
 templates.env.filters['b64encode'] = b64encode_image
 
 
-@app.get("/register/", response_class=HTMLResponse)
+@router_auth.get("/register/", response_class=HTMLResponse)
 def get_register_form(request: Request):
     return templates.TemplateResponse("register.html", {"request": request})
 
 
-@app.post("/register/")
+@router_auth.post("/register/")
 def register(username: str = Form(...), email: str = Form(...), password: str = Form(...),
              db: Session = Depends(get_db)):
     db_user = auth.get_user(db, username=username)
@@ -46,12 +47,12 @@ def register(username: str = Form(...), email: str = Form(...), password: str = 
     return RedirectResponse(url="/login/", status_code=status.HTTP_303_SEE_OTHER)
 
 
-@app.get("/login/", response_class=HTMLResponse)
+@router_auth.get("/login/", response_class=HTMLResponse)
 def get_login_form(request: Request):
     return templates.TemplateResponse("login.html", {"request": request})
 
 
-@app.post("/login/")
+@router_auth.post("/login/")
 def login_for_access_token(username: str = Form(...), password: str = Form(...), db: Session = Depends(get_db)):
     user = auth.authenticate_user(db, username, password)
     if not user:
@@ -74,7 +75,7 @@ async def read_root(request: Request, db: Session = Depends(get_db)):
     return templates.TemplateResponse("index.html", {"request": request, "user": user})
 
 
-@app.get("/logout/")
+@router_auth.get("/logout/")
 def logout():
     response = RedirectResponse(url="/login/", status_code=status.HTTP_303_SEE_OTHER)
     response.delete_cookie("access_token")
@@ -118,3 +119,6 @@ async def predict_diseases(request: Request, image: UploadFile = File(...), db: 
 async def current_user(request: Request, db: Session = Depends(get_db)):
     user = await check_auth(request, db)
     return user
+
+
+app.include_router(router_auth)
