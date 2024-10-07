@@ -1,11 +1,33 @@
-<h1>Профиль пользователя: {{ user.username }}</h1>
-<p>Email: {{ user.email }}</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+</head>
+<body>
+    <h1>User Profile</h1>
+    <a href="/">Home</a>
+    <div>
+        <h2>Username: {{ user.username }}</h2>
+        <p>Email: {{ user.email }}</p>
+    </div>
 
-<h2>История анализов</h2>
-<ul>
-{% for analysis in analyses %}
-    <li>
-        <a href="/results/{{ analysis.id }}">Анализ от {{ analysis.created_at }}</a>
-    </li>
-{% endfor %}
-</ul>
+    <h2>Change Password</h2>
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+    <form action="/profile" method="post">
+        <label for="old_password">Old Password:</label>
+        <input type="password" id="old_password" name="old_password" required>
+
+        <label for="new_password">New Password:</label>
+        <input type="password" id="new_password" name="new_password" required>
+
+        <label for="confirm_new_password">Confirm New Password:</label>
+        <input type="password" id="confirm_new_password" name="confirm_new_password" required>
+
+        <button type="submit">Change Password</button>
+    </form>
+</body>
+</html>
