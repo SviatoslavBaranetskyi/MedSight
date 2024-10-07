@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History</title>
+</head>
+<body>
+    <h2>Analysis History</h2>
+    <a href="/">Home</a>
+    <div>
+        {% for analysis in analyses %}
+            <div class="analysis-entry">
+                <h3>ID: {{ analysis.id }}</h3>
+                <p>Results: {{ analysis.result }}</p>
+                <p>Date: {{ analysis.created_at }}</p>
+                <img src="data:image/png;base64,{{ analysis.image_data | b64encode }}" alt="Analysis Image" width="300" height="300">
+            </div>
+        {% else %}
+            <p>No analyses found.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
