@@ -49,4 +49,8 @@ def predict_image(image_data: bytes, model: nn.Module, transform: transforms.Com
         output = torch.sigmoid(output).cpu().numpy()[0]
 
     predicted_labels = [class_map[i] for i in range(len(output)) if output[i] > 0.5]
+
+    if not predicted_labels:
+        predicted_labels.append(class_map[14])
+
     return predicted_labels
