@@ -2,6 +2,7 @@ import json
 import base64
 from fastapi import FastAPI, Form, UploadFile, File
 from fastapi.responses import HTMLResponse
+from starlette.responses import JSONResponse
 from starlette.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 
@@ -10,7 +11,7 @@ from utils import *
 from database import engine
 from auth import create_access_token
 from schemas import UserResponse
-from router import router_auth
+from router import router_auth, router_analysis
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -82,7 +83,7 @@ def logout():
     return response
 
 
-@app.get("/analyze/", response_class=HTMLResponse)
+@router_analysis.get("/current-analysis/", response_class=HTMLResponse)
 async def get_current_analysis(request: Request, db: Session = Depends(get_db)):
     user = await get_authenticated_user(request, db)
     if isinstance(user, RedirectResponse):
@@ -97,7 +98,7 @@ async def get_current_analysis(request: Request, db: Session = Depends(get_db)):
     return templates.TemplateResponse("current_analysis.html", {"request": request, "analysis": current_analysis})
 
 
-@app.post("/predict/")
+@router_analysis.post("/predict/")
 async def predict_diseases(request: Request, image: UploadFile = File(...), db: Session = Depends(get_db)):
     user = await get_authenticated_user(request, db)
     if isinstance(user, RedirectResponse):
@@ -112,7 +113,17 @@ async def predict_diseases(request: Request, image: UploadFile = File(...), db: 
     db.commit()
     db.refresh(analysis)
 
-    return RedirectResponse(url="/analyze/", status_code=status.HTTP_303_SEE_OTHER)
+    return RedirectResponse(url="/analysis/current-analysis/", status_code=status.HTTP_303_SEE_OTHER)
+
+
+@router_analysis.get("/history/", response_class=HTMLResponse)
+async def get_analysis_history(request: Request, db: Session = Depends(get_db)):
+    user = await get_authenticated_user(request, db)
+    if isinstance(user, RedirectResponse):
+        return user
+
+    analyses = db.query(models.Analysis).filter(models.Analysis.user_id == user.id).all()
+    return templates.TemplateResponse("history.html", {"request": request, "analyses": analyses})
 
 
 @app.get("/users/me", response_model=UserResponse)
@@ -121,4 +132,31 @@ async def current_user(request: Request, db: Session = Depends(get_db)):
     return user
 
 
+@app.get("/profile", response_class=HTMLResponse)
+async def get_user_profile(request: Request, db: Session = Depends(get_db)):
+    user = await get_authenticated_user(request, db)
+    if isinstance(user, RedirectResponse):
+        return user
+
+    return templates.TemplateResponse("profile.html", {"request": request, "user": user})
+
+
+@app.post("/profile", response_class=HTMLResponse)
+async def change_password(
+    request: Request,
+    old_password: str = Form(...),
+    new_password: str = Form(...),
+    confirm_new_password: str = Form(...),
+    db: Session = Depends(get_db)
+):
+    user = await get_authenticated_user(request, db)
+    if isinstance(user, RedirectResponse):
+        return user
+
+    user.hashed_password = auth.get_password_hash(new_password)
+    db.commit()
+
+    return JSONResponse(content={"message": "Password updated successfully."})
+
 app.include_router(router_auth)
+app.include_router(router_analysis)
