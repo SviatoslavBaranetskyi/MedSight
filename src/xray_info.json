@@ -1,0 +1,323 @@
+{
+  "Atelectasis": {
+    "description": "Atelectasis is a medical condition characterized by the partial or complete collapse of a lung or a portion of a lung, leading to reduced gas exchange and potential decreases in blood oxygen levels.",
+    "causes": [
+      "Obstruction from mucus plugs, foreign bodies, or tumors",
+      "Compression due to fluid accumulation, tumors, or enlarged lymph nodes",
+      "Post-surgical complications, particularly after abdominal or thoracic surgery"
+    ],
+    "diagnosis": "Diagnosed through imaging studies such as chest X-rays or CT scans.",
+    "treatment": [
+      "Physiotherapy to expand the lungs",
+      "Medications for infection or inflammation",
+      "Surgery in severe cases to remove blockages"
+    ]
+  },
+  "Cardiomegaly": {
+        "description": "Cardiomegaly refers to an enlarged heart, which can indicate various underlying health conditions. It may lead to complications such as heart failure and arrhythmias.",
+        "causes": [
+            "Hypertension (high blood pressure)",
+            "Heart valve disease",
+            "Cardiomyopathy",
+            "Coronary artery disease",
+            "Thyroid disease, anemia, or excessive alcohol consumption"
+        ],
+        "diagnosis": "Diagnosed through imaging techniques like chest X-rays, echocardiograms, and MRI scans, alongside blood tests.",
+        "treatment": [
+            "Medications for high blood pressure and heart failure",
+            "Lifestyle changes, including diet and exercise",
+            "Surgical procedures to repair heart valves or bypass blocked arteries"
+        ]
+    },
+  "Effusion": {
+        "description": "Effusion refers to the accumulation of fluid in a body cavity, most commonly in the pleural space surrounding the lungs. It can lead to breathing difficulties and chest pain.",
+        "types": [
+            "Pleural Effusion",
+            "Pericardial Effusion",
+            "Ascites"
+        ],
+        "causes": [
+            "Infections such as pneumonia or tuberculosis",
+            "Heart failure",
+            "Cancers",
+            "Inflammation from conditions like pancreatitis or lupus"
+        ],
+        "diagnosis": "Diagnosis typically involves physical examination, imaging techniques like X-rays or CT scans, and thoracentesis for fluid analysis.",
+        "treatment": [
+            "Medications for underlying causes",
+            "Thoracentesis to relieve symptoms",
+            "Surgery in severe cases to prevent recurrence"
+        ]
+    },
+  "Infiltration": {
+        "description": "Infiltration refers to the abnormal accumulation of substances within lung tissue, impairing gas exchange and leading to respiratory issues.",
+        "causes": [
+            "Infections such as pneumonia",
+            "Inflammatory diseases like sarcoidosis",
+            "Malignancies including lung cancer",
+            "Pulmonary edema due to heart failure"
+        ],
+        "diagnosis": "Diagnosis typically involves imaging techniques like X-rays or CT scans, and may require a lung biopsy.",
+        "symptoms": [
+            "Cough",
+            "Shortness of breath",
+            "Chest pain",
+            "Fever (in cases of infection)"
+        ],
+        "treatment": [
+            "Antibiotics for infections",
+            "Corticosteroids for inflammation",
+            "Chemotherapy or radiation for malignancy"
+        ]
+    },
+  "Mass": {
+        "description": "A mass refers to an abnormal lump or growth in various tissues or organs, which can be benign or malignant.",
+        "causes": [
+            "Benign tumors (e.g., lipomas, fibromas)",
+            "Malignant tumors (e.g., carcinomas, sarcomas)",
+            "Cysts (fluid-filled sacs)",
+            "Infections (e.g., abscesses, granulomas)",
+            "Inflammation (e.g., rheumatoid arthritis)"
+        ],
+        "diagnosis": "Diagnosis may involve imaging studies like X-rays or CT scans, and biopsies to determine the nature of the mass.",
+        "symptoms": [
+            "Pain or discomfort in the area",
+            "Swelling or changes in appearance",
+            "Difficulty breathing (if in the chest)",
+            "Changes in bowel or urinary habits (if in the abdomen)"
+        ],
+        "treatment": [
+            "Surgery to remove the mass",
+            "Radiation therapy for malignant tumors",
+            "Chemotherapy for cancerous masses",
+            "Observation for benign masses"
+        ]
+    },
+  "Nodule": {
+        "description": "A nodule is a small, rounded mass of tissue that can be found in various organs and may be benign or malignant.",
+        "causes": [
+            "Infections (e.g., tuberculosis, fungal infections)",
+            "Inflammatory conditions (e.g., rheumatoid arthritis, sarcoidosis)",
+            "Benign tumors (e.g., lipomas, fibromas)",
+            "Malignant tumors (e.g., lung cancer, thyroid cancer)"
+        ],
+        "diagnosis": "Diagnosis often involves imaging techniques and biopsies to determine the nodule's nature.",
+        "symptoms": [
+            "Palpable lump or swelling",
+            "Pain or discomfort",
+            "Coughing or difficulty breathing (if in the lungs)",
+            "Changes in thyroid function (if in the thyroid)"
+        ],
+        "treatment": [
+            "Observation for benign nodules",
+            "Surgery for suspicious or symptomatic nodules",
+            "Medication for infections or inflammatory conditions"
+        ]
+    },
+  "Pneumonia": {
+        "description": "An infection that inflames the air sacs in the lungs, potentially filling them with fluid or pus.",
+        "causes": [
+            "Bacterial (e.g., Streptococcus pneumoniae)",
+            "Viral (e.g., influenza, RSV)",
+            "Fungal (e.g., Histoplasma capsulatum)",
+            "Aspiration (inhaling food or liquids)"
+        ],
+        "diagnosis": "Diagnosis may involve physical exams, imaging tests, and laboratory tests to identify the pathogen.",
+        "symptoms": [
+            "Cough with mucus",
+            "Fever and chills",
+            "Shortness of breath",
+            "Chest pain",
+            "Fatigue"
+        ],
+        "treatment": [
+            "Antibiotics for bacterial pneumonia",
+            "Antiviral medications for viral infections",
+            "Supportive care"
+        ]
+    },
+  "Pneumothorax": {
+        "description": "A condition where air leaks into the pleural space between the lung and chest wall, causing the lung to collapse.",
+        "causes": [
+            "Spontaneous pneumothorax",
+            "Traumatic pneumothorax",
+            "Tension pneumothorax"
+        ],
+        "diagnosis": "Diagnosis includes physical examination, chest X-rays, or CT scans to detect air in the pleural space.",
+        "symptoms": [
+            "Sudden chest pain",
+            "Shortness of breath",
+            "Rapid breathing",
+            "Fatigue",
+            "Cyanosis in severe cases"
+        ],
+        "treatment": [
+            "Observation for small pneumothorax",
+            "Needle aspiration or chest tube insertion",
+            "Surgery in severe or recurrent cases"
+        ],
+        "prevention": [
+            "Avoid smoking",
+            "Manage underlying lung conditions"
+        ]
+    },
+  "Consolidation": {
+        "description": "A condition where the lung tissue becomes solidified due to the filling of the alveoli with fluid, pus, blood, or other substances, often seen in infections or lung disease.",
+        "causes": [
+            "Pneumonia",
+            "Pulmonary edema",
+            "Pulmonary hemorrhage",
+            "Lung cancer"
+        ],
+        "diagnosis": "Imaging techniques such as chest X-rays or CT scans are used to detect areas of consolidation. In some cases, bronchoscopy may be required.",
+        "symptoms": [
+            "Cough, often with sputum production",
+            "Fever",
+            "Shortness of breath",
+            "Chest pain",
+            "Crackles heard during lung examination"
+        ],
+        "treatment": [
+            "Antibiotics for bacterial infections",
+            "Antifungal or antiviral medications for fungal or viral infections",
+            "Diuretics for pulmonary edema",
+            "Oxygen therapy in severe cases"
+        ],
+        "prognosis": "Varies depending on the cause but is generally good with proper treatment for infections like pneumonia."
+    },
+  "Edema": {
+        "description": "An abnormal accumulation of fluid in tissues, particularly in the lungs (pulmonary edema), often associated with heart failure, infections, or trauma.",
+        "causes": [
+            "Heart failure",
+            "Acute respiratory distress syndrome (ARDS)",
+            "Infections such as pneumonia",
+            "Kidney disease"
+        ],
+        "diagnosis": "Imaging such as chest X-rays and CT scans can identify fluid buildup, while echocardiograms and blood tests help pinpoint the underlying cause.",
+        "symptoms": [
+            "Shortness of breath, especially when lying flat",
+            "Coughing with frothy or blood-tinged sputum",
+            "Rapid, shallow breathing",
+            "Fatigue",
+            "Swelling in legs or abdomen"
+        ],
+        "treatment": [
+            "Diuretics to reduce fluid buildup",
+            "Oxygen therapy in severe cases",
+            "Medications for heart conditions if heart failure is the cause",
+            "Treating underlying infections or diseases"
+        ],
+        "prognosis": "The outlook varies depending on the cause but can be managed with appropriate treatment. Severe cases may have a poorer prognosis."
+    },
+  "Emphysema": {
+        "description": "A chronic lung condition characterized by damage to the air sacs in the lungs, causing difficulty breathing and typically associated with smoking.",
+        "causes": [
+            "Smoking",
+            "Air pollution",
+            "Occupational exposure to fumes or chemicals",
+            "Genetic factors like alpha-1 antitrypsin deficiency"
+        ],
+        "diagnosis": "Pulmonary function tests, chest X-rays or CT scans, and arterial blood gas tests are used to diagnose emphysema.",
+        "symptoms": [
+            "Shortness of breath, especially during physical activity",
+            "Chronic cough with mucus",
+            "Wheezing",
+            "Fatigue",
+            "Weight loss"
+        ],
+        "treatment": [
+            "Smoking cessation",
+            "Bronchodilators",
+            "Inhaled steroids",
+            "Oxygen therapy in advanced cases",
+            "Pulmonary rehabilitation"
+        ],
+        "prognosis": "Emphysema is not curable, but treatment can help manage symptoms and slow progression. Early smoking cessation is crucial to improving long-term outcomes."
+    },
+  "Fibrosis": {
+        "description": "A condition marked by the thickening and scarring of tissue, usually as a result of injury, inflammation, or long-term disease. Pulmonary fibrosis affects the lungs, making it difficult to breathe.",
+        "causes": [
+            "Chronic inflammation (sarcoidosis, autoimmune diseases)",
+            "Environmental exposure (asbestos, silica)",
+            "Certain medications or treatments (chemotherapy, radiation)",
+            "Genetics (idiopathic pulmonary fibrosis)",
+            "Injuries or surgeries to organs"
+        ],
+        "diagnosis": "Imaging tests like X-rays or CT scans, pulmonary function tests, and tissue biopsies are used to diagnose fibrosis.",
+        "symptoms": [
+            "Shortness of breath, especially with activity",
+            "Chronic dry cough",
+            "Fatigue",
+            "Unintended weight loss",
+            "Chest pain (in some cases)"
+        ],
+        "treatment": [
+            "Antifibrotic medications (pirfenidone, nintedanib)",
+            "Oxygen therapy in advanced cases",
+            "Lung transplant for severe cases",
+            "Pulmonary rehabilitation"
+        ],
+        "prognosis": "Fibrosis is irreversible, but treatment can slow its progression. In severe cases like idiopathic pulmonary fibrosis, the disease can lead to respiratory failure if untreated."
+    },
+  "Pleural_Thickening": {
+        "description": "Scarring and fibrosis of the pleura, the thin membrane around the lungs, which restricts lung expansion and can cause respiratory difficulties.",
+        "causes": [
+            "Asbestos exposure (asbestosis)",
+            "Tuberculosis",
+            "Chronic inflammation (e.g., rheumatoid arthritis, systemic lupus erythematosus)",
+            "Infections causing pleurisy",
+            "Lung injury or trauma",
+            "Mesothelioma (cancer linked to asbestos exposure)"
+        ],
+        "diagnosis": "Imaging tests like chest X-rays and CT scans are used to detect pleural thickening. A pleural biopsy may be needed to rule out cancer.",
+        "symptoms": [
+            "Shortness of breath",
+            "Chest pain, especially with deep breaths",
+            "Fatigue due to reduced lung function"
+        ],
+        "treatment": [
+            "Treating underlying causes (infections, inflammation)",
+            "Medications (anti-inflammatories, antibiotics, cancer treatment)",
+            "Oxygen therapy for respiratory support",
+            "Surgery in severe cases (pleurectomy)"
+        ],
+        "prognosis": "Depends on the cause; treatable infections or conditions may improve with therapy, but cases related to asbestosis or mesothelioma may lead to long-term lung impairment."
+    },
+  "Hernia": {
+        "description": "A condition where an organ or tissue pushes through a weak spot in the muscle or surrounding tissue, most commonly occurring in the abdomen.",
+        "types": [
+            "Inguinal hernia (groin)",
+            "Femoral hernia (thigh)",
+            "Umbilical hernia (belly button)",
+            "Hiatal hernia (upper stomach/diaphragm)",
+            "Incisional hernia (post-surgery)"
+        ],
+        "causes": [
+            "Muscle weakness",
+            "Heavy lifting",
+            "Chronic coughing",
+            "Obesity",
+            "Frequent straining during bowel movements",
+            "Previous abdominal surgery"
+        ],
+        "diagnosis": [
+            "Physical examination to check for a bulge",
+            "Imaging tests like ultrasound, CT scan, or MRI"
+        ],
+        "symptoms": [
+            "Visible bulge in the affected area",
+            "Pain or discomfort, especially when straining",
+            "Burning or aching sensation at the site"
+        ],
+        "treatment": [
+            "Watchful waiting for asymptomatic hernias",
+            "Surgical repair (open or laparoscopic)",
+            "Lifestyle changes like weight management and avoiding heavy lifting"
+        ],
+        "prognosis": "Hernias can be successfully treated with surgery, but untreated hernias can lead to complications such as incarceration or strangulation, which may require emergency surgery."
+    },
+  "No Finding": {
+        "description": "No abnormalities, diseases, or conditions were detected in the diagnostic test performed.",
+        "advice": "Even if no findings are reported, if the patient experiences symptoms or concerns, it is important to consult with a healthcare professional for further evaluation."
+    }
+}

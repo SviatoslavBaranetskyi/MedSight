@@ -1,7 +1,9 @@
-from sqlalchemy import Column, Integer, String, LargeBinary, ForeignKey, DateTime
-from sqlalchemy.orm import relationship
-from database import Base
 from datetime import datetime
+
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
+from sqlalchemy.orm import relationship
+
+from src.db.database import Base
 
 
 class User(Base):
@@ -20,7 +22,7 @@ class Analysis(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey('users.id'), index=True)
-    image_data = Column(LargeBinary)
+    image_url = Column(String)
     result = Column(String)
     created_at = Column(DateTime, default=datetime.utcnow)
 

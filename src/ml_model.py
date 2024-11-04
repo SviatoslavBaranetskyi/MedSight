@@ -1,8 +1,9 @@
+import io
+
 import torch
 import torch.nn as nn
-from torchvision import models, transforms
 from PIL import Image
-import io
+from torchvision import models, transforms
 
 
 class ChestXRayModel(nn.Module):
@@ -23,7 +24,7 @@ class ChestXRayModel(nn.Module):
 
 # Loading a saved model
 model = ChestXRayModel()
-model.load_state_dict(torch.load('chest_xray_model.pth', map_location=torch.device('cpu'), weights_only=True))
+model.load_state_dict(torch.load('src/chest_xray_model.pth', map_location=torch.device('cpu'), weights_only=True))
 model.eval()
 
 # Transformations for images
@@ -35,9 +36,11 @@ transform = transforms.Compose([
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model.to(device)
 
-class_map = {0: 'Atelectasis', 1: 'Consolidation', 2: 'Infiltration', 3: 'Pneumothorax', 4: 'Edema',
-              5: 'Emphysema', 6: 'Fibrosis', 7: 'Effusion', 8: 'Pneumonia', 9: 'Pleural_thickening',
-              10: 'Cardiomegaly', 11: 'Nodule', 12: 'Mass', 13: 'Hernia', 14: 'No Finding'}
+class_map = {
+    0: 'Atelectasis', 1: 'Consolidation', 2: 'Infiltration', 3: 'Pneumothorax', 4: 'Edema',
+    5: 'Emphysema', 6: 'Fibrosis', 7: 'Effusion', 8: 'Pneumonia', 9: 'Pleural_thickening',
+    10: 'Cardiomegaly', 11: 'Nodule', 12: 'Mass', 13: 'Hernia', 14: 'No Finding'
+}
 
 
 def predict_image(image_data: bytes, model: nn.Module, transform: transforms.Compose, class_map: dict) -> list:
